@@ -27,10 +27,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(override=True)
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = True if os.getenv("SECRET_KEY") == "True" else False
+SECRET_KEY =os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv("DEBUG")
+DEBUG = True if os.getenv("DEBUG")=="True" else False
 
 ALLOWED_HOSTS = []
 
