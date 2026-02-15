@@ -1,0 +1,34 @@
+[
+{
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+        "name": "Television",
+        "description": ""
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+        "name": "Telephone",
+        "description": "some telephones"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 3,
+    "fields": {
+        "name": "headphones",
+        "description": "Headphones are personal audio output devices worn over, on, or in the ears to deliver sound, ranging from immersive over-ear models to portable earbuds. Key types include noise-canceling, wireless (Bluetooth), and, for professional use, studio-grade, offering features like active noise cancellation (ANC), microphones for calls, and various comfort-focused designs."
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 4,
+    "fields": {
+        "name": "computer",
+        "description": "A computer is an electronic device that processes raw data into useful information by following stored instructions (programs). It operates via hardware (physical components) and software (instructions), accepting input, performing calculations, storing data, and producing output. Modern computers use binary code (0s and 1s) to perform rapid, accurate, and automatic operations."
+    }
+}
+]
