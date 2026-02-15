@@ -1,15 +1,22 @@
 from django.core.exceptions import ValidationError
 from django.db import OperationalError, IntegrityError, DataError
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 from catalog.models import Product, Contact
 
 
 # Create your views here.
 def home(request):
-    most_recent_five_products = Product.objects.order_by("-created_at")[:5]
-    return render(request, "home.html", {"products": most_recent_five_products})
+    products = Product.objects.order_by("created_at")
+    context = {"products": products}
+    return render(request, "home.html", context)
+
+
+def product_details(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+    context = {"product": product}
+    return render(request, "product_details.html", context)
 
 
 def contacts(request):
