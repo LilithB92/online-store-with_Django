@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+ {% load my_tags %}
 
 {% block title %}Skystore{% endblock %}
 
@@ -11,29 +12,45 @@
 {% endblock %}
 
 {% block content %}
-    <div class="row text-center">
-        {% for product in products %}
-        <div class="col-3">
+    <div class="row text-center  justify-content-center">
+        {% for product in  page_obj %}
+        <div class="col-4 me-3">
             <div class="card mb-4 box-shadow">
-                <div class="card-header">
-                    <h4 class="my-0 font-weight-normal">{{ product.name}}</h4>
-                </div>
-                <div class="card-body">
-                    <h1 class="card-title pricing-card-title">{{ product.price}} &#x20BD</h1>
-<!--                    <ul class="list-unstyled mt-3 mb-4 text-start m-3">-->
-<!--                        <li>- Неограниченная лицензия</li>-->
-<!--                        <li>- Поддержка</li>-->
-<!--                        <li>- Установка на сервер</li>-->
-<!--                        <li>- Получение обновлений</li>-->
-<!--                    </ul>-->
-                         {% if product.description %}
-                            <small class="mt-3 mb-4 text-start m-3">{{ product.description|slice:":150" }}</small>
-                         {% endif %}
-                    <button type="button" class="btn btn-lg btn-block btn-outline-primary">Купить</button>
-                </div>
+                <div class="card" style="width: 24rem;">
+                  <img src="{{ product.img | media_filter}}" class="img-fluid d-block mx-auto" alt="{{product.name}}" style="width: 40%; height: 200px; object-fit: cover ">
+                  <div class="card-body">
+                    <h5 class="card-title  text-center">Имя: {{product.name}}</h5>
+                    {% if product.description %}
+                        <p class="card-text">Описание: {{product.description|slice:":100"}}...</p>
+                    {% else %}
+                         <p class="card-text">Описание: Нет описании </p>
+                    {% endif %}
+                    <a href="{% url 'catalog:product_details' product.pk %}" class="btn btn-info" role="button">View Details</a>
+
+
+                  </div>
+               </div>
             </div>
         </div>
         {% endfor %}
+            <nav aria-label="Page navigation example">
+              <ul class="pagination justify-content-center">
+
+                  <li class="page-item  {% if not  page_obj.has_previous %} disabled {% endif %} ">
+                    <a  href="?page={{ request.GET.page|add:-1}}" class="page-link">Previous</a>
+                  </li>
+                  {% for  page in page_obj.paginator.page_range %}
+                      <li class="page-item  ">
+                        <a  href="?page={{ page }}" class="page-link">
+                            {{ page }}
+                        </a>
+                      </li>
+                  {% endfor %}
+                    <li class="page-item {% if not page_obj.has_next %} disabled {% endif %} ">
+                      <a class="page-link" href="?page={{ request.GET.page|add:1}}">Next</a>
+                    </li>
+              </ul>
+            </nav>
     </div>
 
 {% endblock %}
