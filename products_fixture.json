@@ -1,0 +1,41 @@
+[
+{
+    "model": "catalog.product",
+    "pk": 1,
+    "fields": {
+        "name": "HTC",
+        "description": "",
+        "img": "",
+        "category": 2,
+        "price": 34000.0,
+        "created_at": "2026-02-12T15:57:31.037Z",
+        "updated_at": "2026-02-12T18:34:16.397Z"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+        "name": "AirPods",
+        "description": "Apple AirPods are premium, Bluetooth-based wireless earbuds with intelligent features like automatic ear detection, spatial audio with dynamic head tracking, and voice-activated Siri. Driven by H1 or H2 chips, they offer high-fidelity sound, Active Noise Cancellation (Pro models), and long-lasting battery life via a portable charging case. ",
+        "img": "",
+        "category": 3,
+        "price": 53178.0,
+        "created_at": "2026-02-12T18:04:57.021Z",
+        "updated_at": "2026-02-12T18:04:57.021Z"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 3,
+    "fields": {
+        "name": "Dell",
+        "description": null,
+        "img": "",
+        "category": 4,
+        "price": 155000.0,
+        "created_at": "2026-02-12T18:11:03.596Z",
+        "updated_at": "2026-02-12T18:11:03.596Z"
+    }
+}
+]
