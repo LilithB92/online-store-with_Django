@@ -2,7 +2,8 @@ from django.core.exceptions import ValidationError
 from django.core.paginator import Paginator
 from django.db import OperationalError, IntegrityError, DataError
 from django.http import HttpResponse
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render
+from django.views.generic import DetailView
 
 from catalog.models import Product, Contact
 
@@ -17,10 +18,9 @@ def home(request):
     return render(request, "home.html", context)
 
 
-def product_details(request, pk):
-    product = get_object_or_404(Product, pk=pk)
-    context = {"product": product}
-    return render(request, "product_details.html", context)
+class ProductDetailView(DetailView):
+    model = Product
+    template_name = "product_details.html"
 
 
 def contacts(request):
