@@ -1,8 +1,5 @@
-from django.core.exceptions import ValidationError
-from django.db import OperationalError, IntegrityError, DataError
-from django.http import HttpResponse
-from django.shortcuts import render
-from django.views.generic import DetailView, ListView
+from django.urls import reverse_lazy
+from django.views.generic import DetailView, ListView, CreateView
 
 from catalog.models import Product, Contact
 
@@ -19,14 +16,8 @@ class ProductDetailView(DetailView):
     template_name = "product_details.html"
 
 
-def contacts(request):
-    if request.method == "POST":
-        try:
-            name = request.POST.get("name")
-            phone = request.POST.get("phone")
-            message = request.POST.get("message")
-            Contact(name=name, phone=phone, message=message).save()
-            return HttpResponse(f"{name} сообщение успешно отправлено!!!")
-        except (ValidationError, OperationalError, IntegrityError, DataError, ValueError):
-            return render(request, "contacts.html")
-    return render(request, "contacts.html")
+class ContactCreateView(CreateView):
+    model = Contact
+    fields = ["name", "phone", "message"]
+    template_name = "contacts.html"
+    success_url = reverse_lazy("catalog:products_list")
