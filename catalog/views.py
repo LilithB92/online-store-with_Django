@@ -1,21 +1,17 @@
 from django.core.exceptions import ValidationError
-from django.core.paginator import Paginator
 from django.db import OperationalError, IntegrityError, DataError
 from django.http import HttpResponse
 from django.shortcuts import render
-from django.views.generic import DetailView
+from django.views.generic import DetailView, ListView
 
 from catalog.models import Product, Contact
 
 
-# Create your views here.
-def home(request):
-    products = Product.objects.order_by("created_at")
-    paginator = Paginator(products, 2)  # 10 элементов на страницу
-    page_number = request.GET.get("page")  # Получение номера страницы из URL
-    page_obj = paginator.get_page(page_number)
-    context = {"page_obj": page_obj}
-    return render(request, "home.html", context)
+class ProductList(ListView):
+    model = Product
+    template_name = "home.html"
+    context_object_name = "products"  # Optional: renames 'object_list' to 'articles'
+    paginate_by = 2  # Number of items per page
 
 
 class ProductDetailView(DetailView):
