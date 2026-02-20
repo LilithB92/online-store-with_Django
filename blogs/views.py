@@ -1,17 +1,20 @@
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
+from blogs.models import Blog
+
 
 class BlogsListView(ListView):
-    pass
+    model = Blog
+    template_name = 'blogs/base.html'
 
 class BlogDetailView(DetailView):
-    pass
+    model = Blog
 
 class BlogCreateView(CreateView):
-    pass
+    model = Blog
 
 class BlogUpdateView(UpdateView):
-    pass
+    model = Blog
 
 class BlogDeleteView(DeleteView):
-    pass
+    model = Blog
