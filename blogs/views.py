@@ -5,7 +5,7 @@ from blogs.models import Blog
 
 class BlogsListView(ListView):
     model = Blog
-    template_name = 'blogs/base.html'
+
 
 class BlogDetailView(DetailView):
     model = Blog
