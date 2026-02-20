@@ -16,9 +16,12 @@
   </head>
   <body>
     <header data-bs-theme="dark">
+
      {% include 'blogs/includes/menu.html' %}
     </header>
     <main>
+    {% include 'blogs/includes/section_header.html' %}
+
     {% block content %}{% endblock %}
     </main>
     <footer class="text-body-secondary py-5">
