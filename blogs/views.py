@@ -6,6 +6,7 @@ from blogs.models import Blog
 
 class BlogsListView(ListView):
     model = Blog
+    paginate_by = 3
 
     def get_queryset(self):
         # Получаем только активные объекты
