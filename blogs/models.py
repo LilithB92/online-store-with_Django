@@ -5,7 +5,7 @@ class Blog(models.Model):
     """
     Класс блогов
     """
-
+    objects = models.Manager()
     title = models.CharField(max_length=200, verbose_name="заголовок", help_text="Введите название заголовок")
     content = models.TextField(verbose_name="содержимое", help_text="Введите содержимое")
     img = models.ImageField(verbose_name="превью", upload_to="images/blogs", null=True, blank=True)
