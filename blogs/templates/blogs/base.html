@@ -20,7 +20,10 @@
      {% include 'blogs/includes/menu.html' %}
     </header>
     <main>
+    {% block section %}
     {% include 'blogs/includes/section_header.html' %}
+    {% endblock %}
+
 
     {% block content %}{% endblock %}
     </main>

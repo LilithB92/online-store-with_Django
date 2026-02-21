@@ -9,7 +9,7 @@ class BlogsListView(ListView):
 
 class BlogDetailView(DetailView):
     model = Blog
-    template_name = "blogs/blog_list.html"
+
 #
 class BlogCreateView(CreateView):
     model = Blog

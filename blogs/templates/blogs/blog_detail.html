@@ -1,41 +1,40 @@
 {% extends 'blogs/base.html' %}
  {% load my_tags %}
-{% block title %} Blogs {% endblock %}
+{% block title %} {{ object.title}} {% endblock %}
 {% block content %}
+{% block section %} {% endblock%}
 
 
-      <div class="album py-5 bg-body-tertiary">
+      <div class="album py-10 bg-body-tertiary">
         <div class="container">
-          {% for blog in  object_list%}
-          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+          <div class="offset-4 row row-cols-1 row-cols-sm-2 row-cols-md-2 g-3">
             <div class="col">
               <div class="card shadow-sm">
-                <img src="{{ blog.img |  media_filter }}" width="100%"  height="225" />
+                <img src="{{ object.img |  media_filter }}" width="100%"  height="400" />
                 <div class="card-body">
                   <p class="card-text">
-                   {{blog.content | slice:":100"}}
+                   {{object.content}}
                   </p>
                   <div
                     class="d-flex justify-content-between align-items-center"
                   >
                     <div class="btn-group">
-                      <a href="{%  url 'blogs:blog_detail' blog.pk  %}" class="btn btn-sm btn-outline-primary" >
+                      <a href="{%  url 'blogs:blog_detail' object.pk  %}"  class="btn btn-sm btn-outline-primary" >
                         View
                       </a>
-                      <a href="{%  url 'blogs:blog_edit' blog.pk  %}"  class="btn btn-sm btn-outline-secondary">
+                      <a href="{%  url 'blogs:blog_edit' object.pk  %}"  class="btn btn-sm btn-outline-secondary">
                         Edit
                       </a>
-                      <a href="{%  url 'blogs:blog_delete' blog.pk  %}"  class="btn btn-sm btn-outline-danger">
+                      <a href="{%  url 'blogs:blog_delete' object.pk  %}"   class="btn btn-sm btn-outline-danger">
                         Delete
                       </a>
                     </div>
-                    <small class="text-body-secondary">{{blog.viewcount}} views</small>
+                    <small class="text-body-secondary">{{object.viewcount}} views</small>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          {% endfor %}
         </div>
       </div>
 {% endblock %}
