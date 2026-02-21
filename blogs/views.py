@@ -6,6 +6,10 @@ from blogs.models import Blog
 class BlogsListView(ListView):
     model = Blog
 
+    def get_queryset(self):
+        # Получаем только активные объекты
+        return Blog.objects.filter(is_active=True)
+
 
 class BlogDetailView(DetailView):
     model = Blog
