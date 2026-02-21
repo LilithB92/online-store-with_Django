@@ -20,12 +20,13 @@
      {% include 'blogs/includes/menu.html' %}
     </header>
     <main>
-    {% block section %}
-    {% include 'blogs/includes/section_header.html' %}
+
+
+    {% block content %}
+      {% block section %}
+
+      {% endblock %}
     {% endblock %}
-
-
-    {% block content %}{% endblock %}
     </main>
     <footer class="text-body-secondary py-5">
     {% include "blogs/includes/footer.html"%}
