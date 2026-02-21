@@ -29,7 +29,8 @@
                         Delete
                       </a>
                     </div>
-                    <small class="text-body-secondary">{{object.viewcount}} views</small>
+                     <a href="{% url 'blogs:blogs_list' %}"  class="btn btn-sm  btn btn-secondary"> Назад</a>
+                    <small class="text-body-info">{{object.viewcount}} views</small>
                   </div>
                 </div>
               </div>

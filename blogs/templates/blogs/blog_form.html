@@ -1,0 +1,33 @@
+{% extends 'blogs/base.html' %}
+ {% load my_tags %}
+{% block title %} {{ object.title}} {% endblock %}
+{% block content %}
+{% block section %} {% endblock%}
+
+<div class="container ">
+    <div class="row">
+        <div class=" offset-3 col-6 d-flex justify-content-center align-items-center vh-100">
+            <form class="row" method="post" enctype="multipart/form-data">
+                <div class="card">
+                    <div class="card-body">
+                        {% csrf_token %}
+                        {{ form.as_p}}
+                    </div>
+                     <div class="btn-group">
+                        <button type="submit" class="btn btn-sm  btn btn-primary">
+                            {% if object%}
+                                Сохранить
+                            {% else %}
+                                Создать
+                            {% endif%}
+                        </button>
+                        <a href="{% url 'blogs:blogs_list' %}"  class="btn btn-sm  btn btn-secondary"> Назад</a>
+                     </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock%}
