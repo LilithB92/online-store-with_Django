@@ -10,12 +10,21 @@ class BlogsListView(ListView):
 class BlogDetailView(DetailView):
     model = Blog
 
+    def get_object(self, queryset=None):
+        obj = super().get_object(queryset=queryset)
+        obj.viewcount += 1
+        obj.save()
+        return obj
+
+
 #
 class BlogCreateView(CreateView):
     model = Blog
 
+
 class BlogUpdateView(UpdateView):
     model = Blog
+
 
 class BlogDeleteView(DeleteView):
     model = Blog
