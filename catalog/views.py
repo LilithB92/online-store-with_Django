@@ -6,14 +6,18 @@ from catalog.models import Product, Contact
 
 class ProductList(ListView):
     model = Product
-    template_name = "home.html"
     context_object_name = "products"  # Optional: renames 'object_list' to 'articles'
     paginate_by = 2  # Number of items per page
 
 
 class ProductDetailView(DetailView):
     model = Product
-    template_name = "product_details.html"
+
+
+class ProductCreateView(CreateView):
+    model = Product
+    fields = ['name', 'description', 'category', 'price', 'img']
+    success_url = reverse_lazy('catalog:products_list')
 
 
 class ContactCreateView(CreateView):
