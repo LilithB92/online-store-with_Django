@@ -1,0 +1,15 @@
+{% extends 'blogs/base.html' %}
+ {% load my_tags %}
+{% block title %} Удалить объект блога{% endblock %}
+{% block content %}
+{% block section %} {% endblock%}
+<div class="container mt-5">
+        <h1 class="mb-4">Удалить объект блога</h1>
+        <p>Вы уверены, что хотите удалить "{{object.title}}"?</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Удалить</button>
+            <a href="{% url 'blogs:blogs_list' %}" class="btn btn-secondary">Отмена</a>
+        </form>
+</div>
+{% endblock %}

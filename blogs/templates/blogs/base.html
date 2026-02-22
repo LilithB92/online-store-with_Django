@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta
+      name="author"
+      content="Mark Otto, Jacob Thornton, and Bootstrap contributors"
+    />
+    <meta name="generator" content="Astro v5.13.2" />
+     {% load static %}
+    <title>{% block title %} Album example · Bootstrap v5.3 {% endblock %} </title>
+    <link href="{% static '/blogs/css/bootstrap.min.css' %}" rel="stylesheet" />
+    <meta name="theme-color" content="#712cf9" />
+  </head>
+  <body>
+    <header data-bs-theme="dark">
+
+     {% include 'blogs/includes/menu.html' %}
+    </header>
+    <main>
+
+
+    {% block content %}
+      {% block section %}
+
+      {% endblock %}
+    {% endblock %}
+    </main>
+    <footer class="text-body-secondary py-5">
+    {% include "blogs/includes/footer.html"%}
+    </footer>
+    <script
+      src="{% static '/blogs/js/bootstrap.bundle.min.js' %}"
+      class="astro-vvvwv3sm"
+    ></script>
+  </body>
+</html>

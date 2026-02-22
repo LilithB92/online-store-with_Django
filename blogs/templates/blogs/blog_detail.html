@@ -1,0 +1,46 @@
+{% extends 'blogs/base.html' %}
+{% load my_tags %}
+{% block title %} {{ object.title}} {% endblock %}
+{% block content %}
+{% block section %}
+  <section class="py-5 text-center container">
+          <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto">
+              <h1 class="fw-light">{{object.title}}</h1>
+            </div>
+          </div>
+        </section>
+{% endblock%}
+      <div class="album py-10 bg-body-tertiary">
+        <div class="container">
+          <div class=" row row-cols-1 row-cols-sm-2 row-cols-md-1 g-3">
+            <div class="col">
+              <div class="card shadow-sm">
+                <img src="{{ object.img |  media_filter }}" width="100%"  height="400" />
+                <div class="card-body">
+                  <p class="card-text">
+                   {{object.content}}
+                  </p>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <div class="btn-group">
+                      <a href="{%  url 'blogs:blogs_list'  %}"  class="btn btn-sm btn-outline-primary" >
+                         Назад
+                      </a>
+                      <a href="{%  url 'blogs:blog_edit' object.pk  %}"  class="btn btn-sm btn-outline-secondary">
+                        Редактировать
+                      </a>
+                      <a href="{%  url 'blogs:blog_delete' object.pk  %}"   class="btn btn-sm btn-outline-danger">
+                        Удалить
+                      </a>
+                    </div>
+                    <small class="text-body-info">{{object.viewcount}} views</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'blogs/base.html' %}
+ {% load my_tags %}
+{% block title %} Blogs {% endblock %}
+{% block content %}
+  {% block section %}
+       {% include 'blogs/includes/section_header.html' %}
+  {% endblock %}
+
+      <div class="album py-5 bg-body-tertiary">
+        <div class="container">
+
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            {% for blog in  object_list%}
+            <div class="col">
+
+              <div class="card shadow-sm">
+                <img src="{{ blog.img |  media_filter }}" width="100%"  height="225" />
+                <div class="card-body">
+                  <p class="card-text">
+                   {{blog.content | slice:":100"}}...
+                  </p>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <div class="btn-group">
+                      <a href="{%  url 'blogs:blog_detail' blog.pk  %}" class="btn btn-sm btn-outline-primary" >
+                        Смотреть
+                      </a>
+                      <a href="{%  url 'blogs:blog_edit' blog.pk  %}"  class="btn btn-sm btn-outline-secondary">
+                        Редактировать
+                      </a>
+                      <a href="{%  url 'blogs:blog_delete' blog.pk  %}"  class="btn btn-sm btn-outline-danger">
+                        Удалить
+                      </a>
+                    </div>
+                    <small class="text-body-secondary">{{blog.viewcount}} views</small>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            {% endfor %}
+          </div>
+
+        </div>
+      </div>
+{% include 'blogs/includes/pagination.html' %}
+{% endblock %}
