@@ -1,5 +1,6 @@
 from django import forms
 from django.core.exceptions import ValidationError
+from django.db.models.fields import BooleanField
 
 from .models import Product
 
@@ -24,6 +25,15 @@ class ProductForm(forms.ModelForm):
         "радар",
     ]
 
+    def __init__(self, *args, **kwargs):
+        super(ProductForm, self).__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            if isinstance(field, BooleanField):
+                field.widget.attrs["class"] = "form-check-input"
+            else:
+                field.widget.attrs["class"] = "form-control"
+                field.widget.attrs["placeholder"] = field.help_text
+
     def clean(self):
         # Список запрещенных слов
         clean_data = super().clean()
@@ -37,17 +47,17 @@ class ProductForm(forms.ModelForm):
         return clean_data
 
     def clean_price(self):
-        price = self.cleaned_data.get('price')
+        price = self.cleaned_data.get("price")
         if price < 0:
-            raise ValidationError('Цена продукта не может быть отрицательной')
+            raise ValidationError("Цена продукта не может быть отрицательной")
         return price
 
     def clean_img(self):
-        img = self.cleaned_data.get('img')
+        img = self.cleaned_data.get("img")
         max_size_mb = 5
         extensions = (".png", ".jpg")
         if img and (img.size > (max_size_mb * 1024 * 1024)):
             raise ValidationError(f"Максимальный размер файла - {max_size_mb} МБ.")
         if img and (not img.name.endswith(extensions)):
-            raise ValidationError('Неподдерживаемые форматы изображений. Допускаются только JPEG и PNG.')
+            raise ValidationError("Неподдерживаемые форматы изображений. Допускаются только JPEG и PNG.")
         return img
