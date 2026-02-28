@@ -97,6 +97,7 @@ DATABASES = {
 AUTH_USER_MODEL = "users.CustomUser"
 LOGIN_REDIRECT_URL = 'catalog:products_list'
 LOGOUT_REDIRECT_URL = 'users:login'
+LOGIN_URL = 'users:login'
 
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
