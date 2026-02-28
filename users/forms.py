@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.forms import UserCreationForm
 from django.db.models import BooleanField
 
@@ -34,3 +35,15 @@ class CustomUserCreationForm(UserCreationForm):
         if phone_number and not phone_number.isdigit():
             raise forms.ValidationError("Номер телефона должен содержать только цифры.")
         return phone_number
+
+
+class CustomAuthenticationForm(AuthenticationForm):
+    class Meta:
+        model = CustomUser
+        fields = ["email", "password"]
+
+    def __init__(self, *args, **kwargs):
+        super(CustomAuthenticationForm, self).__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            field.widget.attrs["class"] = "form-control"
+            field.widget.attrs["placeholder"] = field.help_text
