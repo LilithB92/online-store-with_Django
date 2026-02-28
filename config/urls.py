@@ -22,6 +22,7 @@ from config import settings
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("users/", include('users.urls', namespace='users')),
     path("catalog/", include('catalog.urls', namespace='catalog')),
     path("blogs/", include('blogs.urls', namespace='blogs')),
 
