@@ -1,5 +1,7 @@
 from django.db import models
 
+from users.models import CustomUser
+
 
 class Category(models.Model):
     """
@@ -38,6 +40,29 @@ class Product(models.Model):
         help_text="Введите категория продукта",
     )
     price = models.FloatField(verbose_name="цена", help_text="Введите цена продукта")
+    STATUS_CHOICES = [
+        ("P", "Pending"),
+        ("A", "Approved"),
+        ("C", "Cancelled"),
+        ("R", "Rejected"),
+    ]
+    Owner = models.ForeignKey(
+        CustomUser,
+        null=True,
+        blank=True,
+        on_delete=models.CASCADE,
+        related_name="продукты",
+        verbose_name="Владелец",
+        help_text="Введите владельца продукта",
+    )
+
+    status = models.CharField(
+        max_length=1,  # Often a single character is enough
+        choices=STATUS_CHOICES,
+        default="P",  # Set a default status
+        null=True,
+        blank=True,
+    )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
