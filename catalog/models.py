@@ -46,11 +46,11 @@ class Product(models.Model):
         ("C", "Cancelled"),
         ("R", "Rejected"),
     ]
-    Owner = models.ForeignKey(
+    owner = models.ForeignKey(
         CustomUser,
+        on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        on_delete=models.CASCADE,
         related_name="продукты",
         verbose_name="Владелец",
         help_text="Введите владельца продукта",

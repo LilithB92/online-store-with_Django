@@ -3,10 +3,11 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.forms import UserCreationForm
 from django.db.models import BooleanField
 
+from catalog.forms import ProductForm
 from .models import CustomUser
 
 
-class CustomUserCreationForm(UserCreationForm):
+class CustomUserCreationForm(ProductForm, UserCreationForm):
     phone_number = forms.CharField(max_length=15, required=True, help_text="Введите Ваш номер телефона")
     username = forms.CharField(max_length=50, required=True)
     usable_password = None

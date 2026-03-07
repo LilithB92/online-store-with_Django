@@ -13,7 +13,7 @@
                     </div>
                      <div class="btn-group">
                         <button type="submit" class="btn btn-sm  btn btn-primary">
-                            {% if object%}
+                            {% if user.is_authenticated and object %}
                                 Сохранить
                             {% else %}
                                 Создать
