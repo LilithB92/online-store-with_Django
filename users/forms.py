@@ -4,6 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.db.models import BooleanField
 
 from catalog.forms import ProductForm
+
 from .models import CustomUser
 
 

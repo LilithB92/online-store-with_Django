@@ -1,10 +1,15 @@
-from django.contrib.auth import login
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import UserPassesTestMixin
 from django.urls import reverse_lazy
-from django.views.generic import DetailView, ListView, CreateView, UpdateView, DeleteView
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.views.generic import CreateView
+from django.views.generic import DeleteView
+from django.views.generic import DetailView
+from django.views.generic import ListView
+from django.views.generic import UpdateView
 
 from catalog.forms import ProductForm
-from catalog.models import Product, Contact
+from catalog.models import Contact
+from catalog.models import Product
 
 
 class ProductList(ListView):
@@ -17,7 +22,7 @@ class ProductDetailView(DetailView):
     model = Product
 
 
-class ProductCreateView(LoginRequiredMixin,CreateView):
+class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy("catalog:products_list")
@@ -38,7 +43,6 @@ class ProductUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     def test_func(self):
         product = self.get_object()
         return product.owner == self.request.user
-
 
 
 class ProductDeleteView(DeleteView):
