@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import UserPassesTestMixin
 from django.http import HttpResponseForbidden
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
@@ -27,6 +28,7 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy("catalog:products_list")
+    permission_required = "catalog.add_product"
 
     def form_valid(self, form):
         product = form.save()
@@ -44,7 +46,6 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
     def get_form_class(self):
         user = self.request.user
         if user == self.object.owner:
-            print(user.has_perm("catalog.can_unpublish_product"))
             return ProductForm
         elif user.has_perm(
             "catalog.can_unpublish_product"
@@ -54,9 +55,15 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
             return HttpResponseForbidden
 
 
-class ProductDeleteView(DeleteView):
+class ProductDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Product
     success_url = reverse_lazy("catalog:products_list")
+    permission_required = "catalog.delete_product"
+
+    def test_func(self):
+        obj = self.get_object()
+        user = self.request.user
+        return obj.owner == self.request.user or user.groups.filter(name="Модератор продуктов").exists()
 
 
 class ContactCreateView(CreateView):
