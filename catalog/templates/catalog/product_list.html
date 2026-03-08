@@ -34,7 +34,7 @@
                           <a href="{%  url 'catalog:product_details' product.pk  %}" class="btn btn-sm btn-outline-primary" >
                             Смотреть
                           </a>
-                             {% if user.is_authenticated  and  product.owner == user %}
+                             {% if product.owner == user or perms.catalog.can_unpublish_product %}
                           <a href="{%  url  'catalog:product_update' product.pk  %}"  class="btn btn-sm btn-outline-secondary">
                             Редактировать
                           </a>
