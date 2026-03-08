@@ -73,6 +73,7 @@ class Product(models.Model):
         verbose_name = "продукт"
         verbose_name_plural = "продукты"
         ordering = ["name", "category", "price"]
+        permissions = [("can_unpublish_product", "Can unpublish product")]
 
 
 class Contact(models.Model):
