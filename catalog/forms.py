@@ -5,13 +5,18 @@ from django.db.models.fields import BooleanField
 from .models import Product
 
 
+class ProductModeratorForm(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = [
+            "status",
+        ]
+
+
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
-        exclude = [
-            "created_at",
-            "updated_at",
-        ]
+        exclude = ["created_at", "updated_at", "status", "owner"]
 
     forbidden_words = [
         "казино",

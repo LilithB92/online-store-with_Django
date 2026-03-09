@@ -8,7 +8,7 @@
         <div class=" col-6 d-flex justify-content-center">
                 <div class="card">
                     <div class="card-body">
-                      <form class="row" method="post" action="{% url 'users:register'%}" enctype="multipart/form-data" >
+                      <form class="row" method="post" enctype="multipart/form-data" >
                         {% csrf_token %}
                         {{ form.as_p }}
                            <button type="submit" class="btn btn-primary">Зарегистрироваться</button>

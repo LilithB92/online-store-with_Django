@@ -26,14 +26,16 @@
             <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                   <a href="{%  url 'catalog:products_list'   %}" class="btn btn-sm btn-outline-primary" >
-                    Смотреть
+                    Назад
                   </a>
-                  <a href="{%  url  'catalog:product_update' product.pk  %}"  class="btn btn-sm btn-outline-secondary">
-                    Редактировать
-                  </a>
-                  <a href="{%  url  'catalog:product_delete' product.pk  %}"  class="btn btn-sm btn-outline-danger">
-                    Удалить
-                  </a>
+                  {% if product.owner == user or perms.catalog.can_unpublish_product %}
+                      <a href="{%  url  'catalog:product_update' product.pk  %}"  class="btn btn-sm btn-outline-secondary">
+                        Редактировать
+                      </a>
+                      <a href="{%  url  'catalog:product_delete' product.pk  %}"  class="btn btn-sm btn-outline-danger">
+                        Удалить
+                      </a>
+                  {% endif %}
                 </div>
                 <small class="text-body-secondary">{{blog.viewcount}} views</small>
               </div>

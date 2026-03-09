@@ -4,14 +4,19 @@
         <a class="p-2 btn btn-outline-primary" href="{% url 'catalog:products_list'%}">Каталог</a>
         <a class="p-2 btn btn-outline-primary" href="{% url 'catalog:product_create'%}">Добавить продукт</a>
         <a class="p-2 btn btn-outline-primary" href="{% url 'catalog:contact_create'%}">Контакты</a>
-        {% if user.is_authenticated %}
-        <form method="post" action="{% url 'users:logout'%}" style="display:inline">
-              {% csrf_token %}
-             <button type="submit" class="btn btn-outline-primary" style="display:inline-block"> Выход</button>
+       {% if user.is_authenticated %}
+            <form method="post" action="{% url 'users:logout'%}" style="display:inline">
+                  {% csrf_token %}
 
-        {% else %}
-        <a class="p-2 btn btn-outline-primary" href="{% url 'users:login'%}">Вход</a>
-        <a class="p-2 btn btn-outline-primary" href="{% url 'users:register'%}">Регистрация</a>
-        {% endif %}
+
+                 <button type="submit" class="btn btn-outline-primary" style="display:inline-block"> Выход</button>
+            </form>
+       {% else %}
+             <form method="post"  style="display:inline">
+                {% csrf_token %}
+            <a class="p-2 btn btn-outline-primary" href="{% url 'users:login'%}">Вход</a>
+            <a class="p-2 btn btn-outline-primary" href="{% url 'users:register'%}">Регистрация</a>
+             </form>
+       {% endif %}
     </nav>
 </div>
