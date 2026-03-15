@@ -1,5 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.mixins import UserPassesTestMixin
+from django.core.cache import cache
 from django.http import HttpResponseForbidden
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
@@ -16,8 +17,15 @@ from catalog.models import Product
 
 class ProductList(ListView):
     model = Product
-    context_object_name = "products"  # Optional: renames 'object_list' to 'articles'
+    context_object_name = "products"  # Optional: renames 'object_list' to 'products'
     paginate_by = 2  # Number of items per page
+
+    def get_queryset(self):
+        queryset = cache.get('dogs_list')
+        if not queryset:
+            queryset = super().get_queryset()
+            cache.set('dogs_list', queryset, 60 * 15)  # Кешируем данные на 15 минут
+        return queryset
 
 
 class ProductDetailView(DetailView):
