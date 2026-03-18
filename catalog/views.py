@@ -13,6 +13,7 @@ from catalog.forms import ProductForm
 from catalog.forms import ProductModeratorForm
 from catalog.models import Contact
 from catalog.models import Product
+from catalog.services import CategoryProductService
 
 
 class ProductList(ListView):
@@ -21,10 +22,10 @@ class ProductList(ListView):
     paginate_by = 2  # Number of items per page
 
     def get_queryset(self):
-        queryset = cache.get('dogs_list')
+        queryset = cache.get("dogs_list")
         if not queryset:
             queryset = super().get_queryset()
-            cache.set('dogs_list', queryset, 60 * 15)  # Кешируем данные на 15 минут
+            cache.set("dogs_list", queryset, 60 * 15)  # Кешируем данные на 15 минут
         return queryset
 
 
@@ -72,6 +73,19 @@ class ProductDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         obj = self.get_object()
         user = self.request.user
         return obj.owner == self.request.user or user.groups.filter(name="Модератор продуктов").exists()
+
+
+class CategoryProductList(ListView):
+    model = Product
+    form_class = ProductForm
+    template_name = "catalog/category_product.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        category_id = self.kwargs["pk"]
+        context["category_name"] = CategoryProductService.get_category_name(category_id)
+        context["product_by_categories"] = CategoryProductService.get_products_by_category(category_id)
+        return context
 
 
 class ContactCreateView(CreateView):
