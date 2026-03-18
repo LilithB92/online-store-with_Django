@@ -4,6 +4,20 @@
         <a class="p-2 btn btn-outline-primary" href="{% url 'catalog:products_list'%}">Каталог</a>
         <a class="p-2 btn btn-outline-primary" href="{% url 'catalog:product_create'%}">Добавить продукт</a>
         <a class="p-2 btn btn-outline-primary" href="{% url 'catalog:contact_create'%}">Контакты</a>
+        {% if categories %}
+           <div class="btn-group">
+              <button type="button" class="p-2 btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="true">
+                Категории
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                {% for category in categories %}
+                   <li><a class="dropdown-item" href="{%  url  'catalog:category_product' category.pk  %}">{{ category.name}}</a></li>
+                {% endfor %}
+              </ul>
+           </div>
+
+        {% endif %}
        {% if user.is_authenticated %}
             <form method="post" action="{% url 'users:logout'%}" style="display:inline">
                   {% csrf_token %}

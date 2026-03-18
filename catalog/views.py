@@ -28,6 +28,11 @@ class ProductList(ListView):
             cache.set("dogs_list", queryset, 60 * 15)  # Кешируем данные на 15 минут
         return queryset
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["categories"] = CategoryProductService.get_categories()
+        return context
+
 
 class ProductDetailView(DetailView):
     model = Product
@@ -84,6 +89,7 @@ class CategoryProductList(ListView):
         context = super().get_context_data(**kwargs)
         category_id = self.kwargs["pk"]
         context["category_name"] = CategoryProductService.get_category_name(category_id)
+        context["categories"] = CategoryProductService.get_categories()
         context["product_by_categories"] = CategoryProductService.get_products_by_category(category_id)
         return context
 

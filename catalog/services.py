@@ -15,3 +15,9 @@ class CategoryProductService:
         """Получаем все категория по ключу категории"""
         category_name = Category.objects.get(id=category_id)
         return category_name
+
+    @staticmethod
+    def get_categories():
+        """Получаем все категории"""
+        category = Category.objects.all()
+        return category
