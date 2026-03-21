@@ -2,15 +2,13 @@
  {% load my_tags %}
 {% block title %} {{ category_name }}s {% endblock %}
 {% block header %}
-
     <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
         <h1 class="display-4">{{ category_name }}s</h1>
     </div>
-
 {% endblock %}
 {% block content %}
     <div class="row text-center  justify-content-center">
-        {% for product in  product_by_categories %}
+        {% for product in  page_obj %}
         <div class="col-4 me-3">
             <div class="card mb-4 box-shadow">
                 <div class="card" style="width: 24rem;">
@@ -42,11 +40,11 @@
                </div>
             </div>
         </div>
+
         {% endfor %}
-        {% if  page_obj.has_previous or page_obj.has_next %}
+    </div>
             <nav aria-label="Page navigation example">
               <ul class="pagination justify-content-center">
-
                   <li class="page-item  {% if not  page_obj.has_previous %} disabled {% endif %} ">
                     <a  href="?page={{ request.GET.page|add:-1}}" class="page-link">Previous</a>
                   </li>
@@ -62,6 +60,5 @@
                     </li>
               </ul>
             </nav>
-        {% endif %}
-    </div>
+
 {% endblock %}

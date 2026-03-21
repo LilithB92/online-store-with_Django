@@ -16,7 +16,7 @@
 {% endblock %}
 {% block content %}
     <div class="row text-center  justify-content-center">
-        {% for product in  page_obj %}
+        {% for product in  products %}
         <div class="col-4 me-3">
             <div class="card mb-4 box-shadow">
                 <div class="card" style="width: 24rem;">
@@ -35,13 +35,14 @@
                             Смотреть
                           </a>
 
-
+                        {% if product.owner == user or perms.catalog.can_unpublish_product %}
                           <a href="{%  url  'catalog:product_update' product.pk  %}"  class="btn btn-sm btn-outline-secondary">
                             Редактировать
                           </a>
                           <a href="{%  url  'catalog:product_delete' product.pk  %}"  class="btn btn-sm btn-outline-danger">
                             Удалить
                           </a>
+                        {% endif %}
 
                         </div>
 

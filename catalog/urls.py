@@ -21,5 +21,5 @@ urlpatterns = [
     path("product/update/<int:pk>/", ProductUpdateView.as_view(), name="product_update"),
     path("product/delete/<int:pk>/", ProductDeleteView.as_view(), name="product_delete"),
     path("products/category/<int:pk>/", CategoryProductList.as_view(), name="category_product"),
-    path('.well-known/appspecific/com.chrome.devtools.json', lambda r: JsonResponse({})),
+    path(".well-known/appspecific/com.chrome.devtools.json", lambda r: JsonResponse({})),
 ]

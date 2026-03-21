@@ -84,6 +84,7 @@ class CategoryProductList(ListView):
     model = Product
     form_class = ProductForm
     template_name = "catalog/category_product.html"
+    paginate_by = 2
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
