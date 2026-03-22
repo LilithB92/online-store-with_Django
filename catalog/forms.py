@@ -60,7 +60,7 @@ class ProductForm(forms.ModelForm):
     def clean_img(self):
         img = self.cleaned_data.get("img")
         max_size_mb = 5
-        extensions = (".png", ".jpg")
+        extensions = (".png", ".jpg", ".jpeg")
         if img and (img.size > (max_size_mb * 1024 * 1024)):
             raise ValidationError(f"Максимальный размер файла - {max_size_mb} МБ.")
         if img and (not img.name.endswith(extensions)):
